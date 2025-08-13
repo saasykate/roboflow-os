@@ -1,219 +1,154 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Roboflow OS</title>
+  <meta name="description" content="Roboflow OS — the principles, habits, and expectations behind how we work." />
+  <meta property="og:title" content="Roboflow OS" />
+  <meta property="og:description" content="The system behind how we work at Roboflow." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://roboflow.com/images/og-default.png" />
+  <meta name="theme-color" content="#6E4BFF" />
   <style>
-    body {
-      background-color: #000;
-      color: #e0e0e0;
-      font-family: 'Courier New', Courier, monospace;
-      padding: 40px;
-      max-width: 960px;
-      margin: 0 auto;
+    :root {
+      --bg: #0b0b10;
+      --panel: #12121a;
+      --text: #e7e7ec;
+      --muted: #a7a7b4;
+      --accent: #8b6cff; /* Roboflow-ish purple */
+      --accent-2: #4d39ff;
+      --border: #222230;
+      --code: #b1ffd6;
+      --maxw: 860px;
     }
 
-    h1, h2, h3 {
-      color: #bb86fc;
-      margin-top: 2em;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 24px; }
+
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: saturate(120%) blur(8px);
+      background: color-mix(in srgb, var(--bg), transparent 25%);
+      border-bottom: 1px solid var(--border);
     }
 
-    h1 {
-      font-size: 2.5em;
-    }
+    .nav { display: flex; align-items: center; gap: 16px; max-width: var(--maxw); margin: 0 auto; padding: 12px 24px; }
+    .brand { font-weight: 800; letter-spacing: 0.2px; }
+    .spacer { flex: 1; }
+    .nav a.btn { border: 1px solid var(--border); padding: 8px 12px; border-radius: 999px; }
 
-    .subhead {
-      font-size: 1.2em;
-      color: #888;
-    }
+    h1 { font-size: 40px; margin: 24px 0 12px; }
+    h2 { font-size: 28px; margin: 32px 0 8px; }
+    p { line-height: 1.6; color: var(--text); }
+    .muted { color: var(--muted); }
 
-    code {
-      color: #7CFC00;
-      font-size: 1.1em;
-    }
+    .hero { padding: 56px 24px 8px; background: radial-gradient(1200px 500px at 50% -200px, color-mix(in srgb, var(--accent), transparent 70%), transparent); }
+    .tag { display: inline-block; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 6px 10px; border-radius: 999px; }
 
-    a {
-      color: #bb86fc;
-      text-decoration: underline;
-    }
+    .toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 16px 0 24px; }
+    .toc a { display: block; border: 1px solid var(--border); padding: 12px 14px; border-radius: 12px; background: var(--panel); }
 
-    pre {
-      background-color: #111;
-      padding: 1em;
-      border: 1px solid #333;
-      overflow-x: auto;
-    }
+    section { border: 1px solid var(--border); background: var(--panel); border-radius: 16px; padding: 22px; margin: 14px 0 18px; }
 
-    .section {
-      border-left: 3px solid #bb86fc;
-      padding-left: 1em;
-      margin-bottom: 3em;
-    }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; }
 
-    .cursor::after {
-      content: "_";
-      animation: blink 1s step-start infinite;
-    }
+    .foot { margin: 44px 0 80px; font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; align-items: center; }
 
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
+    code.inline { color: var(--code); background: #102018; padding: 2px 6px; border-radius: 6px; border: 1px solid #1d2c24; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.95em; }
 
-    hr {
-      border: none;
-      border-top: 1px solid #333;
-      margin: 3em 0;
-    }
-
-    .terminal-title {
-      background-color: #111;
-      color: #7CFC00;
-      padding: 0.5em 1em;
-      margin-bottom: 2em;
-      border: 1px solid #444;
-    }
-
-    ul {
-      padding-left: 1.2em;
-    }
-
-    li {
-      margin-bottom: 0.5em;
+    @media (max-width: 520px) {
+      h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <nav class="nav">
+      <div class="brand">Roboflow OS</div>
+      <div class="spacer"></div>
+      <a class="btn" href="#raising-the-bar">Raising the Bar</a>
+      <a class="btn" href="#how-we-work">How We Work</a>
+      <a class="btn" href="#how-we-win">How We Win</a>
+      <a class="btn" id="edit-link" target="_blank" rel="noopener">Edit on GitHub</a>
+    </nav>
+  </header>
 
-  <div class="terminal-title">
-    $ launch RoboflowOS --init
-  </div>
+  <main>
+    <div class="wrap hero">
+      <span class="tag">Handbook / Manifesto</span>
+      <h1>The system behind how we work</h1>
+      <p>This isn’t a traditional handbook. It’s a window into how we work — the principles, habits, and expectations that guide us as we build the infrastructure for the future of computer vision.</p>
+      <p>We’re on a mission to make the world programmable by giving every developer, team, and company the ability to teach computers to see. It’s ambitious, and so is our culture. We move fast, take ownership, and surround ourselves with people who raise the bar — and help each other rise to meet it.</p>
+      <p>This Operating System is our shared understanding of what we expect from each other, and what you can expect from Roboflow. We hold ourselves to a high bar because we’re building something that matters.</p>
+      <p>Our culture isn’t for everyone — and that’s intentional. The right people will find it challenging, exhilarating, and deeply rewarding. The wrong people will know quickly. Either way, this guide will help you decide if Roboflow is the place where you can do the best work of your life.</p>
+      <p>We share it publicly because great teams build in the open — with trust, clarity, and shared context.</p>
 
-  <h1>> Roboflow OS <span class="cursor"></span></h1>
-  <p class="subhead">The system behind how we work</p>
+      <div class="toc">
+        <a href="#raising-the-bar">Raising the Bar →</a>
+        <a href="#how-we-work">How We Work Together →</a>
+        <a href="#how-we-win">How We Win →</a>
+      </div>
+    </div>
 
-  <nav style="margin-bottom: 2em; font-size: 0.95em;">
-    <span style="margin-right: 1em;"><a href="#intro">intro()</a></span>
-    <span style="margin-right: 1em;"><a href="#boot">boot()</a></span>
-    <span style="margin-right: 1em;"><a href="#company">company.flow()</a></span>
-    <span style="margin-right: 1em;"><a href="#handbook">handbook.describe()</a></span>
-    <span style="margin-right: 1em;"><a href="#team">teammates.raise_bar()</a></span>
-    <span style="margin-right: 1em;"><a href="#trust">trust.default()</a></span>
-    <span style="margin-right: 1em;"><a href="#distributed">work.distributed()</a></span>
-    <span style="margin-right: 1em;"><a href="#build">build() → scale()</a></span>
-    <span style="margin-right: 1em;"><a href="#better">great.then_better()</a></span>
-    <span style="margin-right: 1em;"><a href="#notfor">not_for.everyone()</a></span>
-  </nav>
+    <div class="wrap">
+      <section id="raising-the-bar">
+        <h2>Raising the Bar</h2>
+        <p>Roboflow is a team of builders — world-class in our domains, deeply collaborative, and united by a shared mission. Great teams raise each other’s standards and help each other win, every day.</p>
+        <p><strong>We hire for impact.</strong> We look for people who:</p>
+        <ul>
+          <li><strong>Bias toward action</strong> — Move quickly, build fast, and ship improvements before they’re perfect. One teammate rebuilt our core image pipeline in their first month, cutting processing time in half.</li>
+          <li><strong>Communicate clearly</strong> — Share context in ways that help others move forward with confidence.</li>
+          <li><strong>Challenge with care</strong> — Offer direct feedback and invite it in return, making the work better without making it personal.</li>
+          <li><strong>Work in the open</strong> — Document decisions, share learnings, and default to visibility.</li>
+          <li><strong>Own the outcomes</strong> — Take pride in results, dig into the data, and fix the broken thing even if it’s outside your job description.</li>
+        </ul>
+        <p>We believe honesty is a form of respect. We practice radical candor, assume positive intent, and coach each other to get better.</p>
+        <p>We pay at the top of market to attract and retain exceptional talent. We regularly ask ourselves: <em>If this person were considering leaving, would I fight to keep them?</em> If the answer is no, we give direct feedback and the support needed to level up or find a better fit.</p>
+        <p>Our focus is simple: build the strongest possible team to pursue an ambitious mission.</p>
+      </section>
 
+      <section id="how-we-work">
+        <h2>How We Work Together</h2>
+        <p>Roboflow is a distributed company by design — we hire the best people wherever they are and support them with clear expectations, async tools, and regular opportunities to connect live.</p>
+        <p>We default to written communication, document decisions, and design for time zone flexibility. But we also know some of the best ideas come from spontaneous conversations, so we invest in our hubs in <strong>New York</strong> and <strong>San Francisco</strong> as energizing, productive spaces. Some of our biggest breakthroughs started at a whiteboard in New York, over lunch in San Francisco, or during an onsite brainstorm that shaped a year of roadmap.</p>
+        <p>We bring the full company together regularly at <strong>onsites</strong> to align on strategy, deepen relationships, and re-energize around our mission. Wherever you work, you’ll have meaningful face time when it counts.</p>
+      </section>
 
-  
-  <div class="section" id="intro">
-    <h2><code>intro()</code></h2>
-    <h3>Start Here</h3>
-    <p><strong>This isn’t a traditional handbook. It’s a window into how we work at Roboflow.</strong></p>
-    <p>We’re a mission-driven team, building the infrastructure for the future of computer vision. This document exists to make our expectations clear, to help you decide if Roboflow is the right place for you, and to guide how we work together as we grow.</p>
-    <p>We’re sharing it publicly because we believe great teams build in the open — with trust, clarity, and shared context.</p>
-  </div>
+      <section id="how-we-win">
+        <h2>How We Win</h2>
+        <p>We move fast because we’re here to push the frontier — in computer vision, in AI infrastructure, and in how quickly great teams can deliver with the right tools. Playing it safe doesn’t change the world.</p>
+        <p>Working here should feel uncomfortably exciting. The best growth happens when you’re a little stretched, a little uncertain, and a lot motivated. We run toward ambiguity, bet on big ideas, and experiment without waiting for perfect plans. Feedback loops are fast — from customers, teammates, and ourselves — because learning quickly matters more than being right the first time.</p>
+        <p>We improve relentlessly. “Great today, better tomorrow” isn’t just a mantra — it’s how we work. We run retros, own what didn’t work, and make changes immediately. We treat feedback as a gift, invest in our own learning, and coach each other to level up. Problems get fixed when they’re found, not when they’re assigned.</p>
+        <p>Our culture is a product, and like any product, it evolves. Every person who joins shapes it. We’re not here to preserve Roboflow as it is — we’re here to continually earn the right to exist by delivering real value to users and creating a place where exceptional people want to stay and grow.</p>
+        <p>We expect a lot — from ourselves and each other. We write more than we talk. We ship before we polish. We push each other to be better, and we trust each other deeply. We value honesty over harmony and outcomes over politics.</p>
+        <p>Roboflow isn’t for everyone. But for curious, driven, kind builders who want to change the world, it might be exactly what you’ve been looking for.</p>
+      </section>
 
+      <div class="foot wrap">
+        <span>© Roboflow • Built with ❤ and radical candor.</span>
+        <span class="muted">PRs welcome.</span>
+      </div>
+    </div>
+  </main>
 
-<div class="section" id="boot">
-    <h2><code>boot()</code></h2>
-    <h3>Welcome & Mission</h3>
-    <p>At Roboflow, we’re on a mission to make the world programmable. We believe the next wave of progress will come from teaching computers to see — and we’re building the platform to make that possible for every developer, every team, and every company.</p>
-    <p>Our mission is ambitious — and so is our culture. To win, we need to move fast, take ownership, and surround ourselves with people who raise our standards — and help each other rise to meet them. That’s what this handbook is about: how we work, what we value, and why Roboflow might be the best place you’ve ever worked — or the fastest place you decide isn’t for you.</p>
-    <p>This culture isn't for everyone. That's intentional.</p>
-  </div>
-
-  <div class="section" id="handbook">
-    <h2><code>handbook.describe()</code></h2>
-    <h3>What This Handbook Is</h3>
-    <p>This is not a policy document.<br/>
-    This is not a list of benefits.<br/>
-    It’s how we work.</p>
-    <p>It’s a shared understanding of what we expect from each other — and what you can expect from Roboflow. We hold ourselves to a high bar, because we’re building something that matters.</p>
-    <p>We’re sharing it publicly because we believe great companies are built in the open.</p>
-  </div>
-
-  <div class="section" id="team">
-    <h2><code>teammates.raise_bar()</code></h2>
-    <h3>What We Look For</h3>
-    <p>At Roboflow, we don’t think of ourselves as a family or a factory. We’re a team of builders — people who are world-class in our domains, deeply collaborative, and aligned around a shared mission. Great teams raise each other’s standards and help each other win. That’s what we do here.</p>
-    <p>We don’t hire for pedigree. We hire for impact. We look for people who:</p>
-    <ul>
-      <li><strong>Bias toward action</strong> — You move quickly, build things fast, and ship improvements before they’re perfect.</li>
-      <li><strong>Communicate clearly</strong> — You write and speak in ways that help others move forward with context and confidence.</li>
-      <li><strong>Challenge with care</strong> — You offer direct feedback and invite it in return. You make the work better without making it personal.</li>
-      <li><strong>Work in the open</strong> — You value transparency, share what you’re learning, and default to documentation and visibility.</li>
-      <li><strong>Own the outcomes</strong> — You take pride in the results. You dig into the data. You fix the broken thing even if it’s not your “job.”</li>
-    </ul>
-    <p>We hold each other to high standards. And we believe it’s more respectful to be honest than to protect someone from the truth. That’s why we practice radical candor and assume positive intent. We also believe great teammates coach each other and make the whole team better, not just themselves.</p>
-    <p>We pay at the top of market to attract and retain exceptional people. And we regularly ask ourselves: “If this person were thinking of leaving, would I fight to keep them?” If the answer is no, we owe them honest feedback — and the support to level up or find a better fit elsewhere. This isn’t about loyalty. It’s about building the best possible team to pursue an ambitious mission.</p>
-  </div>
-
-  <div class="section" id="trust">
-    <h2><code>trust.default()</code></h2>
-    <h3>Default to Trust</h3>
-    <p>Roboflow works because we trust our people — with information, with decisions, and with our reputation. We believe people do their best work when they have context and autonomy, not control and permission.</p>
-    <p>We don’t write policies for edge cases or lowest common denominators. Our vacation policy is: “Take what you need.” Our expense policy is: “Act in Roboflow’s best interest.” Our process is: “Make it easy to do the right thing.”</p>
-    <ul>
-      <li><strong>Managers give context, not commands.</strong> They coach, they unblock, they don’t micromanage.</li>
-      <li><strong>Everyone is a decision-maker.</strong> We assign a “DRI” (Directly Responsible Individual) for every important choice — and we expect them to farm for dissent before deciding.</li>
-      <li><strong>Once a decision is made, we “disagree and commit.”</strong> Debate happens before, not after.</li>
-      <li><strong>We ship fast, learn fast, and fix fast.</strong> Perfection isn’t the goal — forward momentum is.</li>
-    </ul>
-    <p>Trust also means giving people access to what’s happening across the company. We work in the open, document decisions, and default to transparency — whether it’s metrics, strategy, or mistakes. We believe anyone at Roboflow should be able to answer “why are we doing this?” and “how can I help?”</p>
-  </div>
-
-<div class="section" id="distributed">
-  <h2><code>work.distributed()</code> 
-  <h3></h3>How We Work Together</h3>
-  <p>Roboflow is a distributed company. That means we build our systems, culture, and communication with flexibility and autonomy in mind — not tied to any one location.</p>
-  <p>That said, we believe working together in person can accelerate trust, creativity, and momentum. We actively encourage team members to work from our hubs in **New York** and **San Francisco**, and we invest in making those spaces energizing, productive environments. Many of our most impactful moments happen when teams jam together on a whiteboard or grab lunch between deep work blocks.</p>
-  <p>We also bring the full company together regularly at **onsites**, where we align on strategy, deepen relationships, and re-energize around our mission. Whether you're based near a hub or not, everyone has the opportunity for meaningful face time.</p>
-  <p>Being distributed is a design choice — one that enables us to hire great people wherever they are, and support them with clear expectations, async tools, and regular opportunities to connect live. You'll see us default to written communication, document decisions, and design for time zone flexibility. But we also know some of the best ideas come from spontaneous hallway conversations — and our hubs are there to support exactly that.</p>
-  <p>Roboflow thrives because we’ve found ways to support **focused, high-impact work** wherever it happens — with a bias toward coming together when it counts.</p>
-</div>
-
-  <div class="section" id="build">
-    <h2><code>build() → scale()</code></h2>
-    <h3>Why We Move Fast</h3>
-    <p>We’re not here to play it safe. We’re here to push the frontier of what’s possible — in computer vision, in AI infrastructure, and in how fast teams can move with the right tools.</p>
-    <p>Working at Roboflow should feel uncomfortably exciting. We believe that’s where the best growth happens — when you’re a little stretched, a little uncertain, and a lot motivated.</p>
-    <ul>
-      <li>Run toward ambiguity instead of away from it.</li>
-      <li>Bet on big ideas, even if they fail fast.</li>
-      <li>Try new experiments without waiting for perfect plans.</li>
-      <li>Expect fast feedback loops — from customers, from teammates, from ourselves.</li>
-    </ul>
-    <p>We’re solving hard technical and product challenges, and there’s no playbook. That means we need people who thrive in motion, stay grounded in first principles, and can build their own clarity.</p>
-  </div>
-
-  <div class="section" id="better">
-    <h2><code>great.then_better()</code></h2>
-    <h3>Continuous Improvement</h3>
-    <p>We’re proud of how far we’ve come, but even more excited about where we’re going. Our mindset is: “Great today. Better tomorrow.”</p>
-    <ul>
-      <li>We run retros. We own what didn’t work. We get better, together.</li>
-      <li>We invite feedback early and often — and treat it as a gift, not a threat.</li>
-      <li>We invest in our own learning, and coach each other to level up.</li>
-      <li>We fix problems when we find them. We don’t wait for someone else to do it.</li>
-    </ul>
-    <p>We believe culture is a product — and like any good product, it evolves. Every person who joins Roboflow makes us different, and we embrace that. We improve how we work just like we improve what we build: with curiosity, data, and iteration.</p>
-    <p>Our goal isn’t to preserve Roboflow. It’s to continually earn the right to exist — by delivering real value to our users, and creating a company where exceptional people want to stay and grow.</p>
-  </div>
-
-  <div class="section" id="notfor">
-    <h2><code>not_for.everyone()</code></h2>
-    <h3>Intentional Intensity</h3>
-    <p>We’re intense. We move fast. We expect a lot. We write more than we talk. We ship before we polish. We push each other to be better.</p>
-    <p>But we also trust deeply. We support one another. We value honesty over harmony, and outcomes over politics.</p>
-    <p>Roboflow isn’t for everyone. But for the right people — the curious, driven, kind builders who want to change the world — it might be exactly what you’ve been looking for.</p>
-  </div>
-
-  <div class="terminal-title">
-    $ complete --exit RoboflowOS
-  </div>
-
+  <script>
+    // If hosted on GitHub Pages under /roboflow-os, construct an "Edit on GitHub" link automatically
+    (function() {
+      var el = document.getElementById('edit-link');
+      var user = 'saasykate';
+      var repo = 'roboflow-os';
+      var branch = 'main';
+      el.href = 'https://github.com/' + user + '/' + repo + '/blob/' + branch + '/index.html';
+      el.textContent = 'Edit on GitHub';
+    })();
+  </script>
 </body>
 </html>
