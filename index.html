@@ -17,23 +17,28 @@
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji")}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
     header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(120%) blur(8px);
       background:color-mix(in srgb,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
     .nav{display:flex;align-items:center;gap:16px;max-width:var(--maxw);margin:0 auto;padding:12px 24px}
-    .brand{font-weight:800;letter-spacing:.2px} .spacer{flex:1}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .spacer{flex:1}
     .nav a.btn{border:1px solid var(--border);padding:8px 12px;border-radius:999px}
-    h1{font-size:40px;margin:24px 0 12px} h2{font-size:28px;margin:32px 0 8px}
-    p{line-height:1.6;color:var(--text)} .muted{color:var(--muted)}
+    h1{font-size:40px;margin:24px 0 12px}
+    h2{font-size:28px;margin:32px 0 8px}
+    p{line-height:1.6}
+    .muted{color:var(--muted)}
     .hero{padding:56px 24px 8px;background:radial-gradient(1200px 500px at 50% -200px,color-mix(in srgb,var(--accent),transparent 70%),transparent)}
     .tag{display:inline-block;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);
       border:1px solid var(--border);padding:6px 10px;border-radius:999px}
     .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0 24px}
     .toc a{display:block;border:1px solid var(--border);padding:12px 14px;border-radius:12px;background:var(--panel)}
     section{border:1px solid var(--border);background:var(--panel);border-radius:16px;padding:22px;margin:14px 0 18px}
-    ul{margin:0;padding-left:18px} li{margin:6px 0}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
     .foot{margin:44px 0 80px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;align-items:center}
     code.inline{color:var(--code);background:#102018;padding:2px 6px;border-radius:6px;border:1px solid #1d2c24;
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.95em}
@@ -55,12 +60,12 @@
   <main>
     <div class="wrap hero">
       <span class="tag">Handbook / Manifesto</span>
-      <h1>The system behind how we work</h1>
+      <h1>Roboflow OS</h1>
 
       <p>This isn’t a traditional handbook. It’s a window into how we work — the principles, habits, and expectations that guide us as we build the infrastructure for the future of computer vision.</p>
       <p>We’re on a mission to make the world programmable by giving every developer, team, and company the ability to teach computers to see. It’s ambitious, and so is our culture. We move fast, take ownership, and surround ourselves with people who raise the bar — and help each other rise to meet it.</p>
       <p>This Operating System is our shared understanding of what we expect from each other, and what you can expect from Roboflow. We hold ourselves to a high bar because we’re building something that matters.</p>
-      <p>Our culture emphasizes pace, ownership, and candor. For many people, that mix is challenging, exhilarating, and deeply rewarding; for others, a different environment may be a better fit. This guide helps you decide whether Roboflow is where you’ll do the most meaningful work of your career.</p>
+      <p>Our culture isn’t for everyone — and that’s intentional. For some, it will be challenging, exhilarating, and deeply rewarding. For others, it may not be the environment where they do their best work. Either way, this guide will help you decide if Roboflow is the place for you to do the most meaningful work of your career.</p>
       <p>We share it publicly because great teams build in the open — with trust, clarity, and shared context.</p>
 
       <div class="toc">
@@ -75,13 +80,13 @@
         <h2>Raising the Bar</h2>
         <p>Roboflow is a team of builders — world-class in our domains, deeply collaborative, and united by a shared mission. Great teams raise each other’s standards and help each other win, every day.</p>
 
-        <p><strong>We hire for impact.</strong> We look for people who:</p>
+        <p><strong>We hire for impact. We look for people who:</strong></p>
         <ul>
-          <li><strong>Bias toward action</strong> — Move quickly, build fast, and ship improvements before they’re perfect. <em>Example: one teammate rebuilt our core image pipeline in their first month, cutting processing time in half.</em></li>
-          <li><strong>Communicate clearly</strong> — Share context in ways that help others move forward with confidence. <em>Example: weekly product updates in public Slack channels explain what shipped and why.</em></li>
-          <li><strong>Challenge with care</strong> — Offer direct feedback and invite it in return, making the work better without making it personal. <em>Example: engineers pair-review product specs before coding starts to avoid wasted cycles.</em></li>
-          <li><strong>Work in the open</strong> — Document decisions, share learnings, and default to visibility. <em>Example: design mockups and customer feedback live in open Figma files shared company-wide.</em></li>
-          <li><strong>Own the outcomes</strong> — Take pride in results, dig into the data, and fix the broken thing even if it’s outside your job description. <em>Example: a support engineer patched a billing API issue while the core team was offline.</em></li>
+          <li><strong>Bias toward action</strong> — Move quickly, build fast, and ship improvements before they’re perfect. <em>Example: one teammate optimized a critical processing pipeline in under a week, cutting processing time by 82% and enabling faster customer deployments.</em></li>
+          <li><strong>Communicate clearly</strong> — Share context in ways that help others move forward with confidence. <em>Example: we write weekly product updates in public Slack channels so everyone knows what’s shipped and why.</em></li>
+          <li><strong>Challenge with care</strong> — Offer direct feedback and invite it in return, making the work better without making it personal. <em>Example: engineers regularly pair-review product specs before coding starts to prevent wasted work.</em></li>
+          <li><strong>Work in the open</strong> — Document decisions, share learnings, and default to visibility. <em>Example: all design mockups and customer feedback are posted in open Figma files and shared company-wide.</em></li>
+          <li><strong>Own the outcomes</strong> — Take pride in results, dig into the data, and fix the broken thing even if it’s outside your job description. <em>Example: a support engineer jumped in to fix a production bug in our billing API when the core team was offline.</em></li>
         </ul>
 
         <p>We believe honesty is a form of respect. We practice radical candor, assume positive intent, and coach each other to get better.</p>
@@ -92,31 +97,21 @@
       <section id="how-we-work">
         <h2>How We Work Together</h2>
         <p>Roboflow is a distributed company by design — we hire the best people wherever they are and support them with clear expectations, async tools, and regular opportunities to connect live.</p>
-
-        <p>We default to written communication, document decisions, and design for time zone flexibility. <em>Example: key decisions are captured in Notion with linked Slack threads so anyone can catch up asynchronously.</em></p>
-
-        <p>We also know some of the best ideas come from spontaneous conversations, so we invest in our hubs in <strong>New York</strong> and <strong>San Francisco</strong> as energizing, productive spaces. <em>Example: our model evaluation dashboard started from a coffee chat in the SF hub and shipped the following sprint.</em></p>
-
-        <p>Some of our biggest breakthroughs started at a whiteboard in New York, over lunch in San Francisco, or during an onsite brainstorm that shaped a year of roadmap. We bring the full company together regularly at <strong>onsites</strong> to align on strategy, deepen relationships, and re-energize around our mission. <em>Example: the last onsite hackathon produced three features now live in production.</em></p>
-
-        <p>Wherever you work, you’ll have meaningful face time when it counts.</p>
+        <p>We default to written communication, document decisions, and design for time zone flexibility. <em>Example: key decisions are recorded in Notion with linked Slack threads so anyone can catch up asynchronously.</em></p>
+        <p>But we also know some of the best ideas come from spontaneous conversations, so we invest in our hubs in <strong>New York</strong> and <strong>San Francisco</strong> as energizing, productive spaces. <em>Example: our model evaluation dashboard originated from a casual coffee conversation in the SF hub.</em></p>
+        <p>Some of our biggest breakthroughs started at a whiteboard in New York, over lunch in San Francisco, or during an onsite brainstorm that shaped a year of roadmap.</p>
+        <p>We bring the full company together regularly at <strong>onsites</strong> to align on strategy, deepen relationships, and re-energize around our mission. <br/>Wherever you work, you’ll have meaningful face time when it counts.</p>
       </section>
 
       <section id="how-we-win">
         <h2>How We Win</h2>
         <p>We move fast because we’re here to push the frontier — in computer vision, in AI infrastructure, and in how quickly great teams can deliver with the right tools. Playing it safe doesn’t change the world.</p>
-
-        <p>Working here should feel uncomfortably exciting. The best growth happens when you’re a little stretched, a little uncertain, and a lot motivated. We run toward ambiguity, bet on big ideas, and experiment without waiting for perfect plans. <em>Example: multi-modal inference support shipped as a beta in three weeks because a small team self-organized and ran with it.</em></p>
-
-        <p>Feedback loops are fast — from customers, teammates, and ourselves — because learning quickly matters more than being right the first time. <em>Example: we’ve rolled out features to a single customer within hours to validate before scaling.</em></p>
-
-        <p>We improve relentlessly. “Great today, better tomorrow” isn’t just a mantra — it’s how we work. We run retros, own what didn’t work, and make changes immediately. <em>Example: after a post-mortem showed review delays, we moved to async PR approvals within a week.</em></p>
-
-        <p>Our culture is a product, and like any product, it evolves. Every person who joins shapes it. We’re here to continually earn the right to exist by delivering real value to users and creating a place where exceptional people want to stay and grow.</p>
-
+        <p>Working here should feel uncomfortably exciting. The best growth happens when you’re a little stretched, a little uncertain, and a lot motivated. We run toward ambiguity, bet on big ideas, and experiment without waiting for perfect plans.</p>
+        <p>Feedback loops are fast — from customers, teammates, and ourselves — because learning quickly matters more than being right the first time.</p>
+        <p>We improve relentlessly. “Great today, better tomorrow” isn’t just a mantra — it’s how we work. We run retros, own what didn’t work, and make changes immediately.</p>
+        <p>Our culture is a product, and like any product, it evolves. Every person who joins shapes it. We’re not here to preserve Roboflow as it is — we’re here to continually earn the right to exist by delivering real value to users and creating a place where exceptional people want to stay and grow.</p>
         <p>We expect a lot — from ourselves and each other. We write more than we talk. We ship before we polish. We push each other to be better, and we trust each other deeply. We value honesty over harmony and outcomes over politics.</p>
-
-        <p>If you’re a curious, driven, kind builder who wants to change the world, this might be exactly what you’ve been looking for.</p>
+        <p>Roboflow isn’t for everyone. But for curious, driven, kind builders who want to change the world, it might be exactly what you’ve been looking for.</p>
       </section>
 
       <div class="foot wrap">
